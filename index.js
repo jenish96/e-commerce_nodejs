@@ -13,6 +13,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static("D:/reactJs/e-commerce_react/build"));
+app.get("*", function (_, res) {
+    res.sendFile(
+        path("D:/reactJs/e-commerce_react/build/index.html"),
+        function (err) {
+            res.status(500).send(err);
+        }
+    );
+});
+
+// console.log(__dirname)
+
 app.post('/login', async (req, res) => {
     const payload = req.body
 
