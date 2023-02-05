@@ -2,6 +2,7 @@ require('./config');
 const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
+const path = require('path');
 const User = require('./model/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -13,17 +14,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static("D:/reactJs/e-commerce_react/build"));
+app.use(express.static(path.join(__dirname, "./e-com_react/build")));
 app.get("*", function (_, res) {
-    res.sendFile(
-        path("D:/reactJs/e-commerce_react/build/index.html"),
-        function (err) {
-            res.status(500).send(err);
-        }
-    );
+  res.sendFile(
+    path.join(__dirname, "./e-com_react/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
 });
 
-// console.log(__dirname)
+console.log(path.join(__dirname, "./e-com_react/build"))
 
 app.post('/login', async (req, res) => {
     const payload = req.body
